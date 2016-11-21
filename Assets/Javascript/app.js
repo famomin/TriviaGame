@@ -50,17 +50,24 @@ $(document).ready(function() {
 		}
 	];
 
+	// timer 
 	var timer = {
 		time : 16,
 		reset: function(){
 			timer.time = 16;
 		},
+
+		// starting timer
 		start: function(){
 			counter = setInterval(timer.count, 1000);
 		},
+
+		// stopping timer
 		stop: function(){
 			clearInterval(counter);
 		},
+
+		// timer countdown
 		count: function(){
 			timer.time --;
 			$('#timeLeft').html(timer.time);
@@ -68,6 +75,7 @@ $(document).ready(function() {
 
 		},
 
+		// times up check 
 	  	check: function(){
 	  	if (timer.time == 0) {
 	  		setTimeout(timesUp, 500);
@@ -95,7 +103,7 @@ $(document).ready(function() {
 		$('.opensGame').removeClass().addClass('container-fluid game text-center');
 		$('.container-fluid').append('<div class="row"> <div class="timeRemaining">Time Left: <span id="timeLeft">15</span> seconds left </div> </div>');
 		$('.container-fluid').append('<div class="row"> <div class="col-sm-10 col-sm-offset-1 questionShowBox"><div id="questionAsked"></div> <div> <ul id="answerChoices2"></ul></div></div></div>');
-		$('.container-fluid').append('<div class="row"> <div class="questionInfo"></div> <div class="questionsRemaining">Question # <span id="questionShowing">1</span></div> </div>');	
+		$('.container-fluid').append('<div class="row"> <div class="questionInfo"></div> <div class="questionsRemaining">Question # <span id="questionShowing"></span></div> </div>');	
 		startGame();
 	}
 
@@ -112,7 +120,7 @@ $(document).ready(function() {
 			timer.start();
 
 
-			$('.questionShowing').html(questionNum); //showing question number
+			$('#questionShowing').html(questionNum+1); //showing question number
 			$('.questionShowBox').empty(); //emptying questions
 			$('.questionInfo').empty(); //emptying the inforation about last question
 
@@ -131,7 +139,7 @@ $(document).ready(function() {
 
 			//storing the answer choice selected by user
 			$("#answerChoices2 li").click(function(){
-				var userSelectedAnswer = $(this).text();
+				var userSelectedAnswer = $(this).text().trim();
 
 				//checking if user is right or wrong
 				if (userSelectedAnswer === questionBank[questionNum].correctAnswer) {
@@ -151,9 +159,9 @@ $(document).ready(function() {
 
 	function correctlyAnswered(){
 		timer.stop();
-		$('.questionShowBox').html('<div class="text-center"><img src"" id="answerImage"> </div>');
-		$('#answerImage').attr('src', questionBank[questionNum].answerGif);
-		$('.questionInfo').html('<div id="answerInfo">You are correct! ' + questionBank[questionNum].answerDetails + '</div>');
+		$('.questionShowBox').html('<div class="text-center"><img src"" id="answerImage"> </div>'); //creating ID for image
+		$('#answerImage').attr('src', questionBank[questionNum].answerGif); //showing image for question
+		$('.questionInfo').html('<div id="answerInfo">You are correct! ' + questionBank[questionNum].answerDetails + '</div>'); //question infromation
 
 		correctAnswers++;
 		questionNum++
@@ -161,31 +169,36 @@ $(document).ready(function() {
 
 	function incorrectlyAnswered () {
 		timer.stop();
-		$('.questionShowBox').html('<div class="text-center"><img src"" id="answerImage"> </div>');
-		$('#answerImage').attr('src', questionBank[questionNum].answerGif);
-		$('.questionInfo').html('<div id="answerInfo">Sorry, that is not the right answer. ' + questionBank[questionNum].answerDetails + '</div>');
+		$('.questionShowBox').html('<div class="text-center"><img src"" id="answerImage"> </div>'); //creating ID for image
+		$('#answerImage').attr('src', questionBank[questionNum].answerGif); //showing image for question
+		$('.questionInfo').html('<div id="answerInfo">Sorry, that is not the right answer. ' + questionBank[questionNum].answerDetails + '</div>'); //question infromation
 		wrongAnswers++;
 		questionNum++
 	}
 
+	//when user does not answer within 15 seconds
 	function timesUp() {
-		timer.stop();
-		$('.questionShowBox').html('<div> <div class="text-center"><img src"" id="answerImage"> </div>');
-		$('#answerImage').attr('src', questionBank[questionNum].answerGif);
-		$('.questionInfo').html('<div id="answerInfo">You ran out of time. ' + questionBank[questionNum].answerDetails + '</div>');
+		timer.stop(); //stopping time from going below zero
+		$('.questionShowBox').html('<div> <div class="text-center"><img src"" id="answerImage"> </div>'); //creating ID for image
+		$('#answerImage').attr('src', questionBank[questionNum].answerGif); //showing image for question
+		$('.questionInfo').html('<div id="answerInfo">You ran out of time. ' + questionBank[questionNum].answerDetails + '</div>'); //question infromation
 		unanswered++;
 		questionNum++;
 	}
 
-
+	// when the game ends
 	function endOfGame() {
-		$('.timeRemaining').html('<div class="text-center"> Sports Trivia Over </div>');			
-		$('.questionInfo').empty();
-		$('#answerImage').attr('src',"");
-		$('.questionsRemaining').html('<div class="text-center"> Sports Trivia Over </div>');
+		$('.timeRemaining').html('<div class="text-center"> Sports Trivia Over </div>'); //changing time stamp to Game Over		
+		$('.questionInfo').empty(); //emptying info about question
+		$('#answerImage').attr('src',""); //taking out image from final score
+		$('.questionsRemaining').html('<div class="text-center"> Sports Trivia Over </div>'); //changing questions # counter to Game over
+
+		//gmae scores
 		$('.questionShowBox').append('<div class="text-center score">You answered ' + correctAnswers + ' questions correctly.</div>');
 		$('.questionShowBox').append('<div class="text-center score">You answered ' + wrongAnswers + ' questions incorrectly.</div>');
 		$('.questionShowBox').append('<div class="text-center score">You did not answer ' + unanswered + ' questions.</div>');
+
+		// adding reset button and its click fucntions
 		$('.questionShowBox').append('<div><button class="startGame"> Play Again</button></div>');
 		$('.startGame').click(function(){
 			RestartGame();
