@@ -30,7 +30,7 @@ $(document).ready(function() {
 		'answerChoices' : ['England', 'Germany', 'France', 'Brazil'],
 		'correctAnswer' : "Brazil",
 		'answerGif' : 'Assets/Images/Brazil.jpeg',
-		'answerDetails' : "When George examines his mother's bra, he gets ketchup on it"
+		'answerDetails' : "Brazil is only country to be part of every FIFA World Cup."
 		}, 
 
 		{'questionNumber' : 4,
