@@ -1,4 +1,82 @@
-#backgroundLogo {
-	height: 100%;
-	width: 100%;
+body {
+	background-image: url("../Images/background.png");
+	background-size: 100%;
+}
+
+/*welcome text*/
+#headerText {
+	color:#CD6155;
+
+}
+
+/*Start Game Button*/
+.startGame {
+	background-color: #008CBA;
+    border: none;
+    color: white;
+    height:75px;
+    width: 250px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+
+/*text showing the questiona and choices*/
+.questionShowBox {
+	font-size: 25px;
+	color:#5DADE2;
+	font-weight: bold;
+}
+
+/*images after answer is selected*/
+#answerImage {
+	max-width: 500px;
+	max-height: 500px;
+	min-width:auto%; 
+	max-width:auto%;
+}
+
+/*time stamp at the top of the game*/
+.timeRemaining {
+	font-size: 20px;
+	color: #FF5733;
+	font-weight: bold;
+	margin-bottom:15px;
+}
+
+/*question number tracker at the bottom*/
+.questionsRemaining {
+	font-size: 20px;
+	color: #FF5733;
+	font-weight: bold;
+}
+
+
+/*answer buttons*/
+.spacingOutAnswer{
+	background-color: #4CAF50;
+    border: none;
+    color: white;
+    height:75px;
+    width: 250px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+} 
+
+/*color for question information */
+.questionInfo {
+	font-size: 18px;
+	color:#5DADE2;
+}
+
+/*final scores*/
+.score {
+	color:#5DADE2;
 }
